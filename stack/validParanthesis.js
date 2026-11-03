@@ -37,29 +37,52 @@ console.log(validParanthesis("()[]mna ies {}"));
 console.log(validParanthesis("{{"));
 */
 
-function validParanthesis (str) {
+// function validParanthesis (str) {
 
-    let map =  {
-        "(" : ")",
-        "{" : "}",
-        "[" : "]"
+//     let map =  {
+//         "(" : ")",
+//         "{" : "}",
+//         "[" : "]"
+//     }
+//     let stack = [];
+//     for(let char of str) {
+//         if(map[char]) {
+//             stack.push(map[char]);
+//         } else {
+//             if(stack.pop() !== char) {
+//                 return false;
+//             }
+//         }
+//     }
+//     return stack.length === 0;
+// }
+
+
+console.log(validParanthesis("{{[]}}")); // true
+console.log(validParanthesis("{{[]}}}")); // false
+console.log(validParanthesis("{{[()]}}}")); //false
+console.log(validParanthesis("()[]{}")); // true
+console.log(validParanthesis("{{"));// false
+
+
+function validParanthesis(str) {
+    const map = {
+        "(":")",
+        "[":"]",
+        "{":"}"
     }
-    let stack = [];
+
+    const stack = [];
+
     for(let char of str) {
         if(map[char]) {
             stack.push(map[char]);
         } else {
             if(stack.pop() !== char) {
+                // console.log("control in if block")
                 return false;
             }
         }
-    }
+    } 
     return stack.length === 0;
 }
-
-
-console.log(validParanthesis("{{[]}}"));
-console.log(validParanthesis("{{[]}}}"));
-console.log(validParanthesis("{{[()]}}}"));
-console.log(validParanthesis("()[]{}"));
-console.log(validParanthesis("{{"));
