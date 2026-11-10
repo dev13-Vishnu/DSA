@@ -1,24 +1,37 @@
 class Stack {
     constructor() {
+        // The internal array holding our stack elements
         this.items = [];
     }
+
+    // Add element to the top
     push(element) {
         this.items.push(element);
     }
+
+    // Remove and return the top element
     pop() {
         if(this.isEmpty()) {
-            return undefined;
+            return undefined; // Avoid underflow
         }
         return this.items.pop();
     }
-    size(){
-        return this.items.length;
-    }
+    // View the top element without removing it
     peek() {
         if(this.isEmpty()) {
             return undefined;
         }
         return this.items[this.items.length -1];
+    }
+
+    // Check if the stack is empty
+    isEmpty() {
+        return this.items.length === 0;
+    }
+
+    // Get the number of elements
+    size(){
+        return this.items.length;
     }
     print() {
         if(this.items.length === 0) {
@@ -31,11 +44,10 @@ class Stack {
         }
         console.log(result);
     }
+
+    // Empty the stack
     clear() {
         this.items = [];
-    }
-    isEmpty() {
-        return this.items.length === 0;
     }
 }
 

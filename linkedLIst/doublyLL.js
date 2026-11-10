@@ -68,11 +68,14 @@ class DoublyLinkedLIst{
         return popped;
     }
     get(index) {
+        // 1. If index is out of bounds, return null
         if(index < 0 || index >=this.length) {
             return null;
         }
-        let current;
+
+        let current; // Declare once
         let mid = Math.floor(this.length/2);
+        // 2. Check if index is in the first half of the list
         if(index < mid) {
             current = this.head;
             let count = 0;
@@ -81,13 +84,14 @@ class DoublyLinkedLIst{
                 count++;
             }
             return current;
-        } else if(index >=mid) {
+        } else if(index >=mid) { // 4. Start at the head and loop FORWARD  using .prev
             let count = this.length-1;
             let current = this.tail;
             while(current && count != index) {
                 current = current.prev;
                 count--;
             }
+            // return the found node
             return current;
         }
     }
@@ -117,23 +121,26 @@ class DoublyLinkedLIst{
         return true;
     }
     remove(index) {
-        if(index < 0 || index >this.length) return false;
-        if(index ===0) return this.shift();
-        if(index ===this.length-1) return this.pop();
-
-        else {
-            let removedNode = this.get(index);
-
-            removedNode.next.prev = removedNode.prev;
-            removedNode.prev.next = removedNode.next;
-
-            removedNode.prev = null;
-            removedNode.next = null;
-
-            this.length--;
-            return removedNode;
-        }
+        // 1. Reject invalid indices (Notice it is >= length)
+        if (index < 0 || index >= this.length) return undefined;
         
+        // 2. Use your existing methods for the edges (return the Node!)
+        if (index === 0) return this.shift();
+        if (index === this.length - 1) return this.pop();
+
+        // 3. Find the target node with ONE get() call
+        let removedNode = this.get(index);
+        
+        // 4. Bridge the gap using the target's neighbors
+        removedNode.prev.next = removedNode.next;
+        removedNode.next.prev = removedNode.prev;
+        
+        // 5. Clean up the removed node's pointers for the Garbage Collector
+        removedNode.next = null;
+        removedNode.prev = null;
+        
+        this.length--;
+        return removedNode;
     }
 }
 

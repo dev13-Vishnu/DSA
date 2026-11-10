@@ -99,15 +99,21 @@ class BST{
         let results = [];
         if(!this.root) return results;
 
+        // Create a recursive helper function
         function traverse(currentNode) {
+            // 1. Push the currentNode's value into the results array immediately
             results.push(currentNode.value);
+            // 2. If the currentNode has a left child, call traverse(currentNode.left)
             if(currentNode.left) {
                 traverse(currentNode.left);
             }
+            // 3. If the currentNode has a right child, call traverse(currentNode.right)
             if(currentNode.right) {
                 traverse(currentNode.right);
             }
         }
+        
+        // Kick of the recurssion by passing in the root
         traverse(this.root);
         return results;
     }
@@ -116,12 +122,15 @@ class BST{
         if(!this.root) return results;
 
         function traverse(currentNode) {
+            // 1. If the currentNode has a left child, call traverse(currentNode.left)
             if(currentNode.left) {
                 traverse(currentNode.left);
             }
+            // 2. If the currentNode has a right child, call traverse(currentNode.right)
             if(currentNode.right) {
                 traverse(currentNode.right);
             }
+            // 3. Push the currentNode's value into the results array immediately
             results.push(currentNode.value);
         }
         traverse(this.root);
@@ -132,10 +141,13 @@ class BST{
         if(!this.root) return results;
 
         function traverse(currentNode) {
+            // 1. If the currentNode has a left child, call traverse(currentNode.left)
             if(currentNode.left) {
                 traverse(currentNode.left);
             }
+            // 2. Push the currentNode's value into the results array immediately
             results.push(currentNode.value);
+            // 3. If the currentNode has a right child, call traverse(currentNode.right)
             if(currentNode.right) {
                 traverse(currentNode.right);
             }

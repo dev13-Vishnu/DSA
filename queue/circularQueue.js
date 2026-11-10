@@ -4,8 +4,8 @@ class CircularQueue{
         this.capacity = capacity;
         this.currentLength = 0;
 
-        this.head = 0; 
-        this.tail = 0;
+        this.head = 0; // Index of the front item
+        this.tail = 0; // Index of the NEXT availabel empty slot
     }
     isFull() {
         return this.currentLength === this.capacity;
@@ -14,19 +14,28 @@ class CircularQueue{
         return this.currentLength === 0;
     }
     enqueue(value) {
-        if (this.isFull()) return false;
+        if (this.isFull()) return false; // Queue is full, cannot add
+        // 1. Insert the value at the current tail index
         this.items[this.tail] = value;
+        // 2. Move the tail pionter forward by 1, wrapping aroudn if necessary using
         this.tail = (this.tail + 1) %this.capacity;
+        // 3. Increment currentLength
         this.currentLength++;
+        // 4. Return true indicating success
         return true;
     }
     dequeue() {
-        if(this.isEmpty()) return null;
+        if(this.isEmpty()) return null; // Queue is empty, cannot remove
         
+        // 1. Get the value at, the current head index
         let popped = this.items[this.head];
+        // 2. Optional: set that indext to null to clear the data
         // this.items[this.head] = null // Optional: Set the index to null to clear the data
+        // 3. More the head pointer forward by 1, wrapping aroudn if necessary using %
         this.head = (this.head + 1) %this.capacity;
+        // decrement currentLength
         this.currentLength--;
+        // return the value
         return popped;
         
     }
